@@ -17,3 +17,5 @@ struct MenuItem
 	Handler handler;
 };
 void mainMenu(struct MenuItem* items, int itemCount);
+void MenuFuntionChoice();
+void MenuInput();

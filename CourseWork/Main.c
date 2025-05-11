@@ -1,9 +1,12 @@
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include "LeftRectangleIntegral.h"
 #include "Menu.h"
 #include <Windows.h>
 #include <math.h>
-#define MENU_ITEM_COUNT 6
+#define MENU_ITEM_COUNT 3
+
+double (*f)(double x) = NULL;
 
 int InputInt(char mess[])
 {
@@ -12,7 +15,7 @@ int InputInt(char mess[])
     while (scanf_s("%d", &num) == 0)
     {
         while (getchar() != '\n');
-        puts("Что-то пошло не так, повторите ввод:");
+        puts("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє, РїРѕРІС‚РѕСЂРёС‚Рµ РІРІРѕРґ:");
     }
     return num;
 }
@@ -23,54 +26,73 @@ double InputDouble(char mess[])
     while (scanf_s("%lf", &num) == 0)
     {
         while (getchar() != '\n');
-        puts("Что-то пошло не так, повторите ввод:");
+        puts("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє, РїРѕРІС‚РѕСЂРёС‚Рµ РІРІРѕРґ:");
     }
     return num;
 }
 
-void solution(double (*f)(double))
+void FunctionChoice()
 {
-    double a, b;
-    int n;
+    MenuFuntionChoice();
+}
+
+void Calculation()
+{
+    MenuInput();
+}
+
+void ReadFromFile(double* a, double* b, double* n)
+{
+    FILE* file;
+    if (file = fopen("D:\\input.txt", "r") == NULL)
+    {
+        perror("РћС€РёР±РєР° С‡С‚РµРЅРёСЏ: ");
+        system("pause");
+        return 1;
+    }
+    else
+    {
+        int counter = fscanf(file, "%lf %lf %lf", a, b, n);
+        if (counter != 3)
+        {
+            printf_s("РћС€РёР±РєР°, РїСЂРѕС‡С‚РµРЅРѕ РїРµСЂРµРјРµРЅРЅС‹С…: %d", counter);
+        }
+        fclose(file);
+    }
+}
+
+void solution()
+{
+    double a, b, n;
     double s;
 
-    a = InputDouble("Введите нижнюю границу интегрирования:");
-    b = InputDouble("Введите верхнюю границу интегрирования:");
-    n = InputInt("Введите точность интегрирования:");
+    a = InputDouble("Р’РІРµРґРёС‚Рµ РЅРёР¶РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ:");
+    b = InputDouble("Р’РІРµРґРёС‚Рµ РІРµСЂС…РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ:");
+    n = InputDouble("Р’РІРµРґРёС‚Рµ С‚РѕС‡РЅРѕСЃС‚СЊ РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ:");
 
-    s = left_rectangle_integral(a, b, n, f);
-    printf_s("Интеграл S = %.2lf\n", s);
+    s = left_rectangle_integral(a, b, 1/n, f);
+    printf_s("РРЅС‚РµРіСЂР°Р» S = %.2lf\n", s);
 }
 
-void choice1()
+InputFromKeyboard()
 {
-    double (*f)(double) = 0;
-    f = f1;
-    solution(f);
+    solution();
 }
-void choice2()
+
+void WriteToFile(double* a, double* b, double* n)
 {
-    double (*f)(double) = 0;
-    f = f2;
-    solution(f);
-}
-void choice3()
-{
-    double (*f)(double) = 0;
-    f = f3;
-    solution(f);
-}
-void choice4()
-{
-    double (*f)(double) = 0;
-    f = f4;
-    solution(f);
-}
-void choice5()
-{
-    double (*f)(double) = 0;
-    f = f5;
-    solution(f);
+    FILE* file;
+    if (file = fopen("D:\\input.txt", "w") == NULL)
+    {
+        perror("РћС€РёР±РєР° С‡С‚РµРЅРёСЏ: ");
+        system("pause");
+        return 1;
+    }
+    else
+    {
+        fprintf(file, "%lf %lf %lf", a, b, n);
+        fclose(file);
+    }
 }
 
 int main() 
@@ -78,15 +100,12 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    SetConsoleTitle(L"Интегралы");
+    SetConsoleTitle(L"РРЅС‚РµРіСЂР°Р»С‹");
     struct MenuItem menuItems[MENU_ITEM_COUNT] =
     {
-        "sin(x)", choice1,
-        "x^2", choice2,
-        "e^x", choice3,
-        "1 / (1 + x)", choice4,
-        "ln(x + 1)", choice5,
-        "Выход", exit
+        "Р’С‹Р±РѕСЂ С„СѓРЅРєС†РёРё", FunctionChoice,
+        "Р’С‹С‡РёСЃР»РµРЅРёРµ", Calculation,
+        "Р’С‹С…РѕРґ", exit
     };
 
     mainMenu(menuItems, MENU_ITEM_COUNT);

@@ -3,6 +3,9 @@
 #include <string.h>
 #include <stdbool.h>
 #include "Menu.h"
+#include "LeftRectangleIntegral.h"
+#define MENU_FUNCTIONS_COUNT 6
+#define MENU_INPUT_COUNT 3
 
 void itemOutput(int row_number, char* text, HANDLE handle, WORD color)
 {
@@ -71,6 +74,7 @@ void mainMenu(struct MenuItem* items, int itemCount)
 	{
 		system("cls");
 		showCursor(false, handle);
+		itemOutput(2, "Ã≈Õﬁ", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		for (int i = 0; i < itemCount; i++)
 		{
 			itemHide(i + 5, items[i].text, handle);
@@ -88,3 +92,132 @@ void mainMenu(struct MenuItem* items, int itemCount)
 		}
 	}
 }
+void MenuFuntionChoice()
+{
+	int activeItem = 0;
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(handle, BACKGROUND_BLUE);
+	bool run = true;
+	struct MenuItem functions[MENU_FUNCTIONS_COUNT] =
+	{
+		"sin(x)", NULL,
+		"x^2", NULL,
+		"e^x", NULL,
+		"1 / (1 + x)", NULL,
+		"ln(x + 1)", NULL,
+		"¬˚ıÓ‰", NULL
+	};
+	while (run)
+	{
+		system("cls");
+		showCursor(false, handle);
+		itemOutput(2, "¬€¡≈–»“≈ ‘”Õ ÷»ﬁ", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		for (int i = 0; i < MENU_FUNCTIONS_COUNT; i++)
+		{
+			itemHide(i + 5, functions[i].text, handle);
+		}
+		itemActivate(activeItem + 5, functions[activeItem].text, handle);
+		selectItem(&activeItem, functions, MENU_FUNCTIONS_COUNT, handle);
+		SetConsoleTextAttribute(handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		system("cls");
+		showCursor(true, handle);
+		switch (activeItem)
+		{
+		case 0:
+		{
+			f = f1;
+			run = false;
+			break;
+		}
+		case 1:
+		{
+			f = f2;
+			run = false;
+			break;
+		}
+		case 2:
+		{
+			f = f3;
+			run = false;
+			break;
+		}
+		case 3:
+		{
+			f = f4;
+			run = false;
+			break;
+		}
+		case 4:
+		{
+			f = f5;
+			run = false;
+			break;
+		}
+		case 5:
+		{
+			run = false;
+			break;
+		}
+		}
+	}
+}
+
+void MenuInput()
+{
+	if (f == NULL)
+	{
+		puts("¬˚ Â˘∏ ÌÂ ‚˚·‡ÎË ÙÛÍÌˆË˛!");
+		return 1;
+	}
+	int activeItem = 0;
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(handle, BACKGROUND_BLUE);
+	bool run = true;
+	struct MenuItem input[MENU_INPUT_COUNT] =
+	{
+		"¬‚Ó‰ ËÁ Ù‡ÈÎ‡", NULL,
+		"¬‚Ó‰ Ò ÍÎ‡‚Ë‡ÚÛ˚", NULL,
+		"¬˚ıÓ‰", NULL
+	};
+	while (run)
+	{
+		system("cls");
+		showCursor(false, handle);
+		itemOutput(2, "—œŒ—Œ¡ —◊»“€¬¿Õ»ﬂ ƒ¿ÕÕ€’", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		for (int i = 0; i < MENU_INPUT_COUNT; i++)
+		{
+			itemHide(i + 5, input[i].text, handle);
+		}
+		itemActivate(activeItem + 5, input[activeItem].text, handle);
+		selectItem(&activeItem, input, MENU_INPUT_COUNT, handle);
+		SetConsoleTextAttribute(handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		system("cls");
+		showCursor(true, handle);
+
+		double a, b, n;
+
+		switch (activeItem)
+		{
+		case 0:
+		{
+			ReadFromFile(&a, &b, &n);
+			itemOutput(2, "¬€¬Œƒ ƒ¿ÕÕ€’", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+
+			run = false;
+			break;
+		}
+		case 1:
+		{
+			InputFromKeyboard();
+			run = false;
+			break;
+		}
+		case 2:
+		{
+			run = false;
+			break;
+		}
+		}
+	}
+}
+
