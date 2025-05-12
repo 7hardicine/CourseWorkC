@@ -61,36 +61,46 @@ void ReadFromFile(double* a, double* b, double* n)
     }
 }
 
-void solution()
+//void solution()
+//{
+//    double a, b, n;
+//    double s;
+//
+//    a = InputDouble("Введите нижнюю границу интегрирования:");
+//    b = InputDouble("Введите верхнюю границу интегрирования:");
+//    n = InputDouble("Введите точность интегрирования:");
+//
+//   
+//}
+void InputSolution(double* a, double* b, double* n)
 {
-    double a, b, n;
+    *a = InputDouble("Введите нижнюю границу интегрирования:");
+    *b = InputDouble("Введите верхнюю границу интегрирования:");
+    *n = InputDouble("Введите точность интегрирования:");
+}
+void InputOutput(double* a, double* b, double* n)
+{
     double s;
-
-    a = InputDouble("Введите нижнюю границу интегрирования:");
-    b = InputDouble("Введите верхнюю границу интегрирования:");
-    n = InputDouble("Введите точность интегрирования:");
-
-    s = left_rectangle_integral(a, b, 1/n, f);
+    s = left_rectangle_integral(*a, *b, 1 / *n, f);
     printf_s("Интеграл S = %.2lf\n", s);
 }
-
-InputFromKeyboard()
-{
-    solution();
-}
+//void InputFromKeyboard()
+//{
+//    solution();
+//}
 
 void WriteToFile(double* a, double* b, double* n)
 {
     FILE* file;
-    if (file = fopen("D:\\input.txt", "w") == NULL)
+    if ((file = fopen("C:\\Users\\Юрий\\source\\repos\\7hardicine\\CourseWorkC\\input.txt", "w"))== NULL)
     {
         perror("Ошибка чтения: ");
         system("pause");
-        return 1;
+        return;
     }
     else
     {
-        fprintf(file, "%lf %lf %lf", a, b, n);
+        fprintf(file, "%lf %lf %lf", *a, *b, *n);
         fclose(file);
     }
 }

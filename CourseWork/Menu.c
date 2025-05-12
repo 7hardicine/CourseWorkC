@@ -162,12 +162,53 @@ void MenuFuntionChoice()
 	}
 }
 
+
+void dataSaves(double* a, double* b, double* n)
+{
+	int activeItem = 0;
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(handle, BACKGROUND_BLUE);
+	bool run = true;
+	struct MenuItem input[2] =
+	{
+		"Сохранить данные", NULL,
+		"Выход", NULL
+	};
+	while (run)
+	{
+		system("cls");
+		showCursor(false, handle);
+		itemOutput(2, "ЧТО ДАЛЬШЕ?", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		for (int i = 0; i < 2; i++)
+		{
+			itemHide(i + 5, input[i].text, handle);
+		}
+		itemActivate(activeItem + 5, input[activeItem].text, handle);
+		selectItem(&activeItem, input, 2, handle);
+		SetConsoleTextAttribute(handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		system("cls");
+		showCursor(true, handle);
+		switch(activeItem)
+		{
+		case 0:
+		{
+			WriteToFile(&a,&b,&n);
+			system("pause");
+			run = false;
+		}
+		case 1:
+		{
+			run = false;
+		}
+		}
+	}
+}
 void MenuInput()
 {
 	if (f == NULL)
 	{
 		puts("Вы ещё не выбрали фукнцию!");
-		return 1;
+		return;
 	}
 	int activeItem = 0;
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -194,7 +235,7 @@ void MenuInput()
 		system("cls");
 		showCursor(true, handle);
 
-		double a, b, n;
+		double *a, *b, *n;
 
 		switch (activeItem)
 		{
@@ -208,7 +249,12 @@ void MenuInput()
 		}
 		case 1:
 		{
-			InputFromKeyboard();
+			itemOutput(2, "Ввод данных", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			InputSolution(&a,&b,&n);
+			itemOutput(8, "Вывод данных", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			InputOutput(&a,&b,&n);
+			system("pause");
+			dataSaves(&a, &b, &n);
 			run = false;
 			break;
 		}
@@ -220,4 +266,3 @@ void MenuInput()
 		}
 	}
 }
-
