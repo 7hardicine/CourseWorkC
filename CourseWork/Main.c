@@ -11,7 +11,7 @@ double (*f)(double x) = NULL;
 int InputInt(char mess[])
 {
     int num;
-    printf_s("%s\n", mess);
+    printf_s("%s ", mess);
     while (scanf_s("%d", &num) == 0)
     {
         while (getchar() != '\n');
@@ -22,7 +22,7 @@ int InputInt(char mess[])
 double InputDouble(char mess[])
 {
     double num;
-    printf_s("%s\n", mess);
+    printf_s("%s ", mess);
     while (scanf_s("%lf", &num) == 0)
     {
         while (getchar() != '\n');
@@ -30,79 +30,21 @@ double InputDouble(char mess[])
     }
     return num;
 }
-
 void FunctionChoice()
 {
     MenuFuntionChoice();
 }
-
 void Calculation()
 {
     MenuInput();
 }
-
-void ReadFromFile(double* a, double* b, double* n)
-{
-    FILE* file;
-    if (file = fopen("D:\\input.txt", "r") == NULL)
-    {
-        perror("Ошибка чтения: ");
-        system("pause");
-        return 1;
-    }
-    else
-    {
-        int counter = fscanf(file, "%lf %lf %lf", a, b, n);
-        if (counter != 3)
-        {
-            printf_s("Ошибка, прочтено переменных: %d", counter);
-        }
-        fclose(file);
-    }
-}
-
-//void solution()
-//{
-//    double a, b, n;
-//    double s;
-//
-//    a = InputDouble("Введите нижнюю границу интегрирования:");
-//    b = InputDouble("Введите верхнюю границу интегрирования:");
-//    n = InputDouble("Введите точность интегрирования:");
-//
-//   
-//}
 void InputSolution(double* a, double* b, double* n)
 {
-    *a = InputDouble("Введите нижнюю границу интегрирования:");
-    *b = InputDouble("Введите верхнюю границу интегрирования:");
-    *n = InputDouble("Введите точность интегрирования:");
-}
-void InputOutput(double* a, double* b, double* n)
-{
-    double s;
-    s = left_rectangle_integral(*a, *b, 1 / *n, f);
-    printf_s("Интеграл S = %.2lf\n", s);
-}
-//void InputFromKeyboard()
-//{
-//    solution();
-//}
-
-void WriteToFile(double* a, double* b, double* n)
-{
-    FILE* file;
-    if ((file = fopen("C:\\Users\\Юрий\\source\\repos\\7hardicine\\CourseWorkC\\input.txt", "w"))== NULL)
-    {
-        perror("Ошибка чтения: ");
-        system("pause");
-        return;
-    }
-    else
-    {
-        fprintf(file, "%lf %lf %lf", *a, *b, *n);
-        fclose(file);
-    }
+    puts("");
+    *a = InputDouble("\n\t  Введите нижнюю границу интегрирования:");
+    *b = InputDouble("\t  Введите верхнюю границу интегрирования:");
+    *n = InputDouble("\t  Введите точность интегрирования:");
+    puts("\n\t  ");
 }
 
 int main() 

@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "Menu.h"
+#include "WorkWithFile.h"
 #include "LeftRectangleIntegral.h"
 #define MENU_FUNCTIONS_COUNT 6
 #define MENU_INPUT_COUNT 3
@@ -161,8 +162,6 @@ void MenuFuntionChoice()
 		}
 	}
 }
-
-
 void dataSaves(double* a, double* b, double* n)
 {
 	int activeItem = 0;
@@ -192,7 +191,7 @@ void dataSaves(double* a, double* b, double* n)
 		{
 		case 0:
 		{
-			WriteToFile(&a,&b,&n);
+			WriteToFile(a,b,n);
 			system("pause");
 			run = false;
 		}
@@ -235,7 +234,7 @@ void MenuInput()
 		system("cls");
 		showCursor(true, handle);
 
-		double *a, *b, *n;
+		double a, b, n;
 
 		switch (activeItem)
 		{
@@ -243,15 +242,15 @@ void MenuInput()
 		{
 			ReadFromFile(&a, &b, &n);
 			itemOutput(2, "ВЫВОД ДАННЫХ", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-
+			InputOutput(&a, &b, &n);  
 			run = false;
 			break;
 		}
 		case 1:
 		{
-			itemOutput(2, "Ввод данных", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			itemOutput(2, "ВВОД ДАННЫХ", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 			InputSolution(&a,&b,&n);
-			itemOutput(8, "Вывод данных", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			itemOutput(8, "ВЫВОД ДАННЫХ", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 			InputOutput(&a,&b,&n);
 			system("pause");
 			dataSaves(&a, &b, &n);
