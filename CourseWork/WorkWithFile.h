@@ -4,6 +4,6 @@
 #include <Windows.h>
 #include <string.h>
 
-void InputOutput(double* a, double* b, double* n);
-void WriteToFile(double* a, double* b, double* n);
+double InputOutput(double* a, double* b, double* n);
+void WriteToFile(double* s);
 void ReadFromFile(double* a, double* b, double* n);

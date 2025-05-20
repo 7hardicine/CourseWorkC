@@ -11,7 +11,7 @@ double f4(double x);  // 1 / (1 + x)
 double f5(double x);  // ln(x + 1)
 double left_rectangle_integral(double a, double b, double n, double (*f)(double));
 //
-void InputOutput(double* a, double* b, double* n);
+double InputOutput(double* a, double* b, double* n);
 void InputSolution(double* a, double* b, double* n);
-void WriteToFile(double* a, double* b, double* n);
+void WriteToFile(double* s);
 void ReadFromFile(double* a, double* b, double* n);

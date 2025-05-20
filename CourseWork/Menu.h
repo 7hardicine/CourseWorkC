@@ -19,4 +19,4 @@ struct MenuItem
 void mainMenu(struct MenuItem* items, int itemCount);
 void MenuFuntionChoice();
 void MenuInput();
-void dataSaves(double* a, double* b, double* n);
+void dataSaves(double* s);

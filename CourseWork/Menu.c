@@ -162,7 +162,7 @@ void MenuFuntionChoice()
 		}
 	}
 }
-void dataSaves(double* a, double* b, double* n)
+void dataSaves(double* s)
 {
 	int activeItem = 0;
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -191,7 +191,7 @@ void dataSaves(double* a, double* b, double* n)
 		{
 		case 0:
 		{
-			WriteToFile(a,b,n);
+			WriteToFile(s);
 			system("pause");
 			run = false;
 		}
@@ -242,7 +242,10 @@ void MenuInput()
 		{
 			ReadFromFile(&a, &b, &n);
 			itemOutput(2, "бшбнд дюммшу", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-			InputOutput(&a, &b, &n);  
+			double s = 0;
+			s = InputOutput(&a, &b, &n);  
+			system("pause");
+			dataSaves(&s);
 			run = false;
 			break;
 		}
@@ -251,9 +254,10 @@ void MenuInput()
 			itemOutput(2, "ббнд дюммшу", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 			InputSolution(&a,&b,&n);
 			itemOutput(8, "бшбнд дюммшу", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-			InputOutput(&a,&b,&n);
+			double s = 0;
+			s = InputOutput(&a,&b,&n);
 			system("pause");
-			dataSaves(&a, &b, &n);
+			dataSaves(&s);
 			run = false;
 			break;
 		}

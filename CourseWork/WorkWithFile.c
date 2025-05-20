@@ -6,16 +6,17 @@
 #include "LeftRectangleIntegral.h"
 
 
-void InputOutput(double* a, double* b, double* n)
+double InputOutput(double* a, double* b, double* n)
 {
     double s;
     s = left_rectangle_integral(*a, *b, 1 / *n, f);
     printf_s("\n\n\t  Нижняя граница: %.2lf\n\t  Верхняя граница: %.2lf\n\t  Точность интегрирования: %.8lf\n\t  Интеграл S = %.2lf\n\n\t  ", *a, *b, *n, s);
+    return s;
 }
-void WriteToFile(double* a, double* b, double* n)
+void WriteToFile(double* s)
 {
     FILE* file;
-    if ((file = fopen("C:\\Users\\Hardicine\\source\\repos\\CourseWorkC\\input.txt", "w")) == NULL)
+    if ((file = fopen("C:\\Users\\Hardicine\\source\\repos\\CourseWorkC\\output.txt", "w")) == NULL)
     {
         perror("Ошибка чтения: ");
         system("pause");
@@ -23,8 +24,9 @@ void WriteToFile(double* a, double* b, double* n)
     }
     else
     {
-        fprintf(file, "%lf %lf %lf", *a, *b, *n);
+        fprintf(file, "%lf", *s);
         fclose(file);
+        puts("Запись в файл прошла успешно!");
     }
 }
 void ReadFromFile(double* a, double* b, double* n)
