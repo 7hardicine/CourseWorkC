@@ -1,24 +1,23 @@
-#define _CRT_SECURE_NO_WARNINGS
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <Windows.h>
 #include <string.h>
 #include <stdbool.h>
 #include "LeftRectangleIntegral.h"
 
-
 double InputOutput(double* a, double* b, double* n)
 {
     double s;
     s = left_rectangle_integral(*a, *b, 1 / *n, f);
-    printf_s("\n\n\t  Нижняя граница: %.2lf\n\t  Верхняя граница: %.2lf\n\t  Точность интегрирования: %.8lf\n\t  Интеграл S = %.2lf\n\n\t  ", *a, *b, *n, s);
+    printf_s("\n\n\t  РќРёР¶РЅСЏСЏ РіСЂР°РЅРёС†Р°: %.2lf\n\t  Р’РµСЂС…РЅСЏСЏ РіСЂР°РЅРёС†Р°: %.2lf\n\t  РўРѕС‡РЅРѕСЃС‚СЊ РёРЅС‚РµРіСЂРёСЂРѕРІР°РЅРёСЏ: %.8lf\n\t  РРЅС‚РµРіСЂР°Р» S = %.2lf\n\n\t  ", *a, *b, *n, s);
     return s;
 }
 void WriteToFile(double* s)
 {
     FILE* file;
-    if ((file = fopen("C:\\Users\\Hardicine\\source\\repos\\CourseWorkC\\output.txt", "w")) == NULL)
+    if ((file = fopen("D:\\output.txt", "w")) == NULL) 
     {
-        perror("Ошибка чтения: ");
+        perror("РћС€РёР±РєР° С‡С‚РµРЅРёСЏ: ");
         system("pause");
         return;
     }
@@ -26,15 +25,15 @@ void WriteToFile(double* s)
     {
         fprintf(file, "%lf", *s);
         fclose(file);
-        puts("Запись в файл прошла успешно!");
+        puts("Р—Р°РїРёСЃСЊ РІ С„Р°Р№Р» РїСЂРѕС€Р»Р° СѓСЃРїРµС€РЅРѕ!");
     }
 }
 void ReadFromFile(double* a, double* b, double* n)
 {
     FILE* file;
-    if ((file = fopen("C:\\Users\\Hardicine\\source\\repos\\CourseWorkC\\input.txt", "r")) == NULL)
+    if ((file = fopen("D:\\input.txt", "r")) == NULL)
     {
-        perror("Ошибка чтения: ");
+        perror("РћС€РёР±РєР° С‡С‚РµРЅРёСЏ: ");
         system("pause");
         return 1;
     }
@@ -43,7 +42,7 @@ void ReadFromFile(double* a, double* b, double* n)
         int counter = fscanf(file, "%lf %lf %lf", a, b, n);
         if (counter != 3)
         {
-            printf_s("Ошибка, прочтено переменных: %d", counter);
+            printf_s("РћС€РёР±РєР°, РїСЂРѕС‡С‚РµРЅРѕ РїРµСЂРµРјРµРЅРЅС‹С…: %d", counter);
         }
         fclose(file);
     }

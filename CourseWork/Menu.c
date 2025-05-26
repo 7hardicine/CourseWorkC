@@ -1,4 +1,4 @@
-#include <stdio.h>
+Ôªø#include <stdio.h>
 #include <Windows.h>
 #include <string.h>
 #include <stdbool.h>
@@ -17,11 +17,11 @@ void itemOutput(int row_number, char* text, HANDLE handle, WORD color)
 }
 void itemActivate(int row_number, char* text, HANDLE handle)
 {
-	itemOutput(row_number, text, handle, BACKGROUND_BLUE | FOREGROUND_RED);
+	itemOutput(row_number, text, handle, FOREGROUND_RED);
 }
 void itemHide(int row_number, char* text, HANDLE handle)
 {
-	itemOutput(row_number, text, handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	itemOutput(row_number, text, handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 }
 void showCursor(bool visible, HANDLE handle)
 {
@@ -69,25 +69,24 @@ void mainMenu(struct MenuItem* items, int itemCount)
 	cursorPosition.X = 10;
 	int activeItem = 0;
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(handle, BACKGROUND_BLUE);
+	SetConsoleTextAttribute(handle, NULL);
 	bool run = true;
 	while (run)
 	{
 		system("cls");
 		showCursor(false, handle);
-		itemOutput(2, "Ã≈Õﬁ", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		itemOutput(2, "–í–´–ß–ò–°–õ–ï–ù–ò–ï –û–ü–†–ï–î–ï–õ–ï–ù–ù–û–ì–û –ò–ù–¢–ï–ì–†–ê–õ–ê –ú–ï–¢–û–î–û–ú –õ–ï–í–û–°–¢–û–†–û–ù–ù–ò–• –ü–†–Ø–ú–û–£–ì–û–õ–¨–ù–ò–ö–û–í", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		for (int i = 0; i < itemCount; i++)
 		{
 			itemHide(i + 5, items[i].text, handle);
 		}
 		itemActivate(activeItem + 5, items[activeItem].text, handle);
 		selectItem(&activeItem, items, itemCount, handle);
-		SetConsoleTextAttribute(handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		system("cls");
 		showCursor(true, handle);
 		items[activeItem].handler();
-		system("pause");
-		if (strcmp(items[activeItem].text, "¬˚ıÓ‰") == 0)
+		if (strcmp(items[activeItem].text, "–í—ã—Ö–æ–¥") == 0)
 		{
 			run = false;
 		}
@@ -97,7 +96,7 @@ void MenuFuntionChoice()
 {
 	int activeItem = 0;
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(handle, BACKGROUND_BLUE);
+	SetConsoleTextAttribute(handle, NULL);
 	bool run = true;
 	struct MenuItem functions[MENU_FUNCTIONS_COUNT] =
 	{
@@ -106,20 +105,20 @@ void MenuFuntionChoice()
 		"e^x", NULL,
 		"1 / (1 + x)", NULL,
 		"ln(x + 1)", NULL,
-		"¬˚ıÓ‰", NULL
+		"–í—ã—Ö–æ–¥", NULL
 	};
 	while (run)
 	{
 		system("cls");
 		showCursor(false, handle);
-		itemOutput(2, "¬€¡≈–»“≈ ‘”Õ ÷»ﬁ", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		itemOutput(2, "–í–´–ë–ï–†–ò–¢–ï –§–£–ù–ö–¶–ò–Æ", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		for (int i = 0; i < MENU_FUNCTIONS_COUNT; i++)
 		{
 			itemHide(i + 5, functions[i].text, handle);
 		}
 		itemActivate(activeItem + 5, functions[activeItem].text, handle);
 		selectItem(&activeItem, functions, MENU_FUNCTIONS_COUNT, handle);
-		SetConsoleTextAttribute(handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		system("cls");
 		showCursor(true, handle);
 		switch (activeItem)
@@ -166,25 +165,25 @@ void dataSaves(double* s)
 {
 	int activeItem = 0;
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(handle, BACKGROUND_BLUE);
+	SetConsoleTextAttribute(handle, NULL);
 	bool run = true;
 	struct MenuItem input[2] =
 	{
-		"—Óı‡ÌËÚ¸ ‰‡ÌÌ˚Â", NULL,
-		"¬˚ıÓ‰", NULL
+		"–°–æ—Ö—Ä–∞–Ω–∏—Ç—å –¥–∞–Ω–Ω—ã–µ", NULL,
+		"–í—ã—Ö–æ–¥", NULL
 	};
 	while (run)
 	{
 		system("cls");
 		showCursor(false, handle);
-		itemOutput(2, "◊“Œ ƒ¿À‹ÿ≈?", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		itemOutput(2, "–ß–¢–û –î–ê–õ–¨–®–ï?", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		for (int i = 0; i < 2; i++)
 		{
 			itemHide(i + 5, input[i].text, handle);
 		}
 		itemActivate(activeItem + 5, input[activeItem].text, handle);
 		selectItem(&activeItem, input, 2, handle);
-		SetConsoleTextAttribute(handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		system("cls");
 		showCursor(true, handle);
 		switch(activeItem)
@@ -206,31 +205,32 @@ void MenuInput()
 {
 	if (f == NULL)
 	{
-		puts("¬˚ Â˘∏ ÌÂ ‚˚·‡ÎË ÙÛÍÌˆË˛!");
+		puts("–í—ã –µ—â—ë –Ω–µ –≤—ã–±—Ä–∞–ª–∏ —Ñ—É–∫–Ω—Ü–∏—é!");
+		system("pause");
 		return;
 	}
 	int activeItem = 0;
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(handle, BACKGROUND_BLUE);
+	SetConsoleTextAttribute(handle, NULL);
 	bool run = true;
 	struct MenuItem input[MENU_INPUT_COUNT] =
 	{
-		"¬‚Ó‰ ËÁ Ù‡ÈÎ‡", NULL,
-		"¬‚Ó‰ Ò ÍÎ‡‚Ë‡ÚÛ˚", NULL,
-		"¬˚ıÓ‰", NULL
+		"–í–≤–æ–¥ –∏–∑ —Ñ–∞–π–ª–∞", NULL,
+		"–í–≤–æ–¥ —Å –∫–ª–∞–≤–∏–∞—Ç—É—Ä—ã", NULL,
+		"–í—ã—Ö–æ–¥", NULL
 	};
 	while (run)
 	{
 		system("cls");
 		showCursor(false, handle);
-		itemOutput(2, "—œŒ—Œ¡ —◊»“€¬¿Õ»ﬂ ƒ¿ÕÕ€’", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		itemOutput(2, "–°–ü–û–°–û–ë –°–ß–ò–¢–´–í–ê–ù–ò–Ø –î–ê–ù–ù–´–•", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		for (int i = 0; i < MENU_INPUT_COUNT; i++)
 		{
 			itemHide(i + 5, input[i].text, handle);
 		}
 		itemActivate(activeItem + 5, input[activeItem].text, handle);
 		selectItem(&activeItem, input, MENU_INPUT_COUNT, handle);
-		SetConsoleTextAttribute(handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+		SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		system("cls");
 		showCursor(true, handle);
 
@@ -241,7 +241,7 @@ void MenuInput()
 		case 0:
 		{
 			ReadFromFile(&a, &b, &n);
-			itemOutput(2, "¬€¬Œƒ ƒ¿ÕÕ€’", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			itemOutput(2, "–í–´–í–û–î –î–ê–ù–ù–´–•", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 			double s = 0;
 			s = InputOutput(&a, &b, &n);  
 			system("pause");
@@ -251,9 +251,9 @@ void MenuInput()
 		}
 		case 1:
 		{
-			itemOutput(2, "¬¬Œƒ ƒ¿ÕÕ€’", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			itemOutput(2, "–í–í–û–î –î–ê–ù–ù–´–•", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 			InputSolution(&a,&b,&n);
-			itemOutput(8, "¬€¬Œƒ ƒ¿ÕÕ€’", handle, BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			itemOutput(8, "–í–´–í–û–î –î–ê–ù–ù–´–•", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 			double s = 0;
 			s = InputOutput(&a,&b,&n);
 			system("pause");
