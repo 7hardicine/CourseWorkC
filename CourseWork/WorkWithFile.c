@@ -5,13 +5,7 @@
 #include <stdbool.h>
 #include "LeftRectangleIntegral.h"
 
-double InputOutput(double* a, double* b, double* n)
-{
-    double s;
-    s = left_rectangle_integral(*a, *b, 1 / *n, f);
-    printf_s("\n\n\t  Нижняя граница: %.2lf\n\t  Верхняя граница: %.2lf\n\t  Точность интегрирования: %.8lf\n\t  Интеграл S = %.2lf\n\n\t  ", *a, *b, *n, s);
-    return s;
-}
+
 void WriteToFile(double* s)
 {
     FILE* file;

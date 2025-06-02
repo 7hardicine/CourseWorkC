@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include "LeftRectangleIntegral.h"
 #include "Menu.h"
+#include "WorkWithFile.h"
 #include <Windows.h>
+#include <locale.h>
 #include <math.h>
 #define MENU_ITEM_COUNT 3
 
@@ -12,21 +14,56 @@ int InputInt(char mess[])
 {
     int num;
     printf_s("%s ", mess);
-    while (scanf_s("%d", &num) == 0)
+    int ok = 1;
+    while (ok)
     {
-        while (getchar() != '\n');
-        puts("Что-то пошло не так, повторите ввод:");
+        if (scanf_s("%d", &num) == 1)
+        {
+            int clear;
+            if ((clear = getchar()) != '\n' && clear != EOF)
+            {
+                ok = 1;
+                printf_s("\t  Ошибка, повторите ввод: ");
+                while (getchar() != '\n' && clear != EOF);
+            }
+            else
+            {
+                ok = 0;
+            }
+        }
+        else
+        {
+            while (getchar() != '\n');
+            printf_s("\t  Ошибка, повторите ввод: ");
+        }
     }
     return num;
 }
-double InputDouble(char mess[])
-{
+double InputDouble(char mess[]) {
     double num;
     printf_s("%s ", mess);
-    while (scanf_s("%lf", &num) == 0)
+    int ok = 1;
+    while (ok)
     {
-        while (getchar() != '\n');
-        puts("Что-то пошло не так, повторите ввод:");
+        if (scanf_s("%lf", &num) == 1)
+        {
+            int clear;
+            if ((clear = getchar()) != '\n' && clear != EOF)
+            {
+                ok = 1;
+                printf_s("\t  Ошибка, повторите ввод: ");
+                while (getchar() != '\n' && clear != EOF);
+            }
+            else
+            { 
+                ok = 0;
+            }        
+        }
+        else
+        {
+            while (getchar() != '\n');
+            printf_s("\t  Ошибка, повторите ввод: ");
+        }
     }
     return num;
 }
@@ -44,11 +81,17 @@ void InputSolution(double* a, double* b, double* n)
     *a = InputDouble("\n\t  Введите нижнюю границу интегрирования:");
     *b = InputDouble("\t  Введите верхнюю границу интегрирования:");
     *n = InputDouble("\t  Введите точность интегрирования:");
+    while (*n <= 0)
+    {
+        puts("\t  Точность интегрирования не может быть отрицательной или равной 0 !");
+        *n = InputDouble("\t  Введите точность интегрирования:");
+    }
     puts("\n\t  ");
 }
 
 int main() 
 {
+    setlocale(LC_ALL, "russian");
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 

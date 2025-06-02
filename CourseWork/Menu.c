@@ -92,6 +92,13 @@ void mainMenu(struct MenuItem* items, int itemCount)
 		}
 	}
 }
+double InputOutput(double* a, double* b, double* n)
+{
+	double s;
+	s = left_rectangle_integral(*a, *b, 1 / *n, f);
+	printf_s("\n\n\t  Нижняя граница: %.2lf\n\t  Верхняя граница: %.2lf\n\t  Точность интегрирования: %.8lf\n\t  Интеграл S = %.2lf\n\n\t  ", *a, *b, *n, s);
+	return s;
+}
 void MenuFuntionChoice()
 {
 	int activeItem = 0;
@@ -253,7 +260,7 @@ void MenuInput()
 		{
 			itemOutput(2, "ВВОД ДАННЫХ", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 			InputSolution(&a,&b,&n);
-			itemOutput(8, "ВЫВОД ДАННЫХ", handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			printf_s("\t  ВЫВОД ДАННЫХ");
 			double s = 0;
 			s = InputOutput(&a,&b,&n);
 			system("pause");
